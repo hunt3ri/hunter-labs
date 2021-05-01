@@ -1,0 +1,15 @@
+# EC2 Instance Config
+ubuntu_ami_instance         = 1
+instance_type               = "t3a.micro"
+instance_name               = "sandbox"
+associate_public_ip_address = true
+
+# SG Config
+sg_name                     = "Sandbox SG"
+sg_description              = "SG for Sandbox Instance"
+ingress_cidr_blocks         = ["0.0.0.0/0"]
+ingress_rules               = ["all-all"]
+
+# Key Pair Config
+key_name                    = "labs-key"
+public_key                  = "{{ ssh_key }}"

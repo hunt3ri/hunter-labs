@@ -1,0 +1,38 @@
+---
+# Playbook deletes specified users to ensure they cannot log in again
+
+- name: Generate config
+  hosts: localhost
+  become: yes
+  vars_prompt:
+
+    - name: aws_environment
+      prompt: What environment are you configuring MUST be one on dev|test|prod
+      private: no
+
+    - name: aws_profile
+      prompt: What is the name of the aws_profile for the environment
+      private: no
+
+    - name: aws_account
+      prompt: What is the AWS Account Number for the environment
+      private: no
+
+    - name: aws_region
+      prompt: What is the name of the AWS Region infrastructure will be build it, eg us-east-1
+      private: no
+
+    - name: terraform_bucket
+      prompt: What is the name of the AWS S3 bucket your terraform state file will be held
+      private: no
+
+    - name: org_name
+      prompt: What is the name of the Organisation config is being built for (eg hunter-labs)
+      private: no
+
+    - name: ssh_key
+      prompt: What is the public key you intend to ssh to instances with
+      private: no
+
+  roles:
+    - gen_config

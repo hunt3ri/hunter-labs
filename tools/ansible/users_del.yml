@@ -1,0 +1,7 @@
+---
+# Playbook deletes specified users to ensure they cannot log in again
+- name: Delete users
+  hosts: aws_ec2
+  become: yes
+  roles:
+    - users_del

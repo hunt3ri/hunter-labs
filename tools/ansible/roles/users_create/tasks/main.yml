@@ -1,0 +1,22 @@
+- name: configure super-users
+  include_tasks: enable_user.yml
+  vars:
+    username: "{{ item }}"
+    super_sudo: true
+    read_only: false
+  loop:
+    - iain
+
+- name: Setup read-only group for read-only users
+  group:
+    name: read-only
+    state: present
+
+- name: configure readonly users
+  include_tasks: enable_user.yml
+  vars:
+    username: "{{ item }}"
+    super_sudo: false
+    read_only: true
+  loop:
+    - abi

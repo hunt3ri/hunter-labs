@@ -1,0 +1,7 @@
+---
+# Playbook creates users on remote servers so they can ssh to the server
+- name: Create users
+  hosts: aws_ec2
+  become: yes
+  roles:
+    - users_create

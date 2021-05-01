@@ -1,0 +1,14 @@
+# Docker compose file that sets up environment:
+version: "3.9"
+
+services:
+  aws-toolkit:
+    image: hunteri/terraform-packer:latest
+    container_name: aws-toolkit
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../.aws:/root/.aws
+      - ../.ssh:/root/.ssh
+      - ./tools:/tools
+      - ./utils:/utils

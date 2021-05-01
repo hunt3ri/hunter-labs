@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Initialise all TF_VARS environment variables for {{ aws_environment }} environment
+
+printf "Setting tfinit as terraform init alias\n\n"
+alias tfinit="terraform init --backend-config=/tools/terraform/config/backend_{{ aws_environment }}.config"
+# Env var can be accessed by scripts requiring to run terraform init
+export TFINIT="terraform init --backend-config=/tools/terraform/config/backend_{{ aws_environment }}.config"
+
+printf "Setting global terraform vars for PROD environment\n\n" && sleep 0.5
+export TF_VAR_bucket="{{ terraform_bucket }}" && printf "TF_VAR_bucket: `echo $TF_VAR_bucket`\n" && sleep 0.5
+export TF_VAR_environment="{{ aws_environment }}" && printf "TF_VAR_environment: `echo $TF_VAR_environment`\n" && sleep 0.5
+export TF_VAR_profile="{{ aws_profile }}" && printf "TF_VAR_profile: `echo $TF_VAR_profile`\n" && sleep 0.5
+export TF_VAR_region="{{ aws_region }}" && printf "TF_VAR_region: `echo $TF_VAR_region`\n" && sleep 0.5
+export TF_VAR_aws_account="{{ aws_account }}" && printf "TF_VAR_region: `echo $TF_VAR_aws_account`\n" && sleep 0.5
+export TF_VAR_org_name="{{ org_name }}" && printf "TF_VAR_org_name: `echo $TF_VAR_org_name`\n" && sleep 0.5

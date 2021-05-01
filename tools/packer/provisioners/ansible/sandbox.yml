@@ -1,0 +1,8 @@
+---
+
+- name: Create sandbox AMI
+  hosts: sandbox_ami
+  become: yes
+  roles:
+    - common
+    - sandbox

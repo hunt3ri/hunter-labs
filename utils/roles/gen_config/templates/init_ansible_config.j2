@@ -1,0 +1,6 @@
+# Initialise ansible for {{ aws_environment }} environment
+printf "Setting global Ansible vars for {{ aws_environment }} environment\n\n" && sleep 0.5
+export AWS_PROFILE={{ aws_profile }} && printf "AWS_PROFILE: `echo $AWS_PROFILE`\n"
+
+# Install ansible-galaxy requirements
+ansible-galaxy install -r /tools/ansible/config/requirements.yml

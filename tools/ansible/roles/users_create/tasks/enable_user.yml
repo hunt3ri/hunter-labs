@@ -1,0 +1,51 @@
+# create a user and upload SSH authorized_keys file for said user
+# key file is stored locally in public_keys/{{ username }}_authorized_keys
+
+- name: Creating admin user {{ username }}
+  ansible.builtin.user:
+    name: '{{ username }}'
+    home: /home/{{ username }}
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+  when: super_sudo
+
+- name: Creating read-only user {{ username }}
+  ansible.builtin.user:
+    name: '{{ username }}'
+    home: /home/{{ username }}/
+    shell: /bin/bash
+    groups: read-only
+  when: read_only
+
+# Ensure users are not prompted for password when using sudo
+- name: configure admin privileges for {{ username }}
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/{{ username }}
+    owner: root
+    group: root
+    mode: 0440
+  when: super_sudo
+
+# Setup SSH config for new user
+- name: create ssh config dir for {{ username }}
+  file:
+    state: directory
+    path: /home/{{ username }}/.ssh
+    mode: 0700
+    owner: '{{ username }}'
+    group: '{{ username }}'
+
+- name: configure public key for {{ username }}
+  copy:
+    src: public_keys/{{ username }}_authorized_keys
+    dest: /home/{{ username }}/.ssh/authorized_keys
+
+- name: set permissions on authorized_keys for {{ username }}
+  file:
+    state: file
+    path: /home/{{ username }}/.ssh/authorized_keys
+    mode: 0644
+    owner: '{{ username }}'
+    group: '{{ username }}'

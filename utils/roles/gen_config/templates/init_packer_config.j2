@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Initialise all TF_VARS environment variables for {{ aws_environment }} environment
+
+printf "Setting global packer vars for {{ aws_environment }} environment\n\n" && sleep 0.5
+export PKR_VAR_org_name="{{ org_name }}" && printf "PKR_VAR_org_name: `echo $PKR_VAR_org_name`\n" && sleep 0.5
+export PKR_VAR_profile="{{ aws_profile }}" && printf "PKR_VAR_profile: `echo $PKR_VAR_profile`\n" && sleep 0.5
+export PKR_VAR_region="{{ aws_region }}" && printf "PKR_VAR_region: `echo $PKR_VAR_region`\n" && sleep 0.5

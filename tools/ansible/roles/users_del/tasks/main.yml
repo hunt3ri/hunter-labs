@@ -1,0 +1,6 @@
+- name: Removing user
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - abi

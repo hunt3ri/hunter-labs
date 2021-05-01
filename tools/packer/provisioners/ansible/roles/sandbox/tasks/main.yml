@@ -1,0 +1,13 @@
+---
+
+- name: Install pip
+  apt:
+    pkg:
+      - python3
+      - python3-pip
+    state: latest
+
+- name: Use ansible to install ansible - inception :)
+  pip:
+    name: ansible
+    state: latest

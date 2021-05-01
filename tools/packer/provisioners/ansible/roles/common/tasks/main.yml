@@ -1,0 +1,10 @@
+---
+
+#- name: Pause for 30 seconds to allow AWS instance to initialise
+#  pause:
+#    seconds: 30
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
