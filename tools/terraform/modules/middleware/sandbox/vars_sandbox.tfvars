@@ -1,5 +1,6 @@
 # EC2 Instance Config
-ubuntu_ami_instance         = 1
+ubuntu_ami_instance         = 0
+sandbox_ami_instance        = 1
 instance_type               = "t3a.micro"
 instance_name               = "sandbox"
 associate_public_ip_address = true
