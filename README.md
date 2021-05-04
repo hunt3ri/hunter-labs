@@ -108,8 +108,8 @@ docker-compose file maps local ../.ssh directory into container, so private keys
 
 Useful commands
 ```shell
-# Without id_rsa
-ssh -i keyfile.pem ubuntu@host
+# Without id_rsa, pem file must have 400 permission
+ssh -i /home/.ssh/iain.pem iain@host
 # With id_rsa
 ssh ubuntu@host
 ```

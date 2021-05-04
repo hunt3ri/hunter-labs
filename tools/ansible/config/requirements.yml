@@ -2,3 +2,5 @@
 collections:
   # amazon.aws collection see https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
   - name: amazon.aws
+    regions:
+      - us-east-1

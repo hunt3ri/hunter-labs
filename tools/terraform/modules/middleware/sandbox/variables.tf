@@ -18,6 +18,10 @@ variable "ubuntu_ami_instance" {
   description = "Set to 1 to create a sandbox instance with vanilla Ubuntu LTS AKI"
 }
 
+variable "sandbox_ami_instance" {
+  description = "Set to 1 to create instance with custom Labs sandbox AMI"
+}
+
 #################
 # Key Pair
 #################

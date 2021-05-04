@@ -29,3 +29,21 @@ data "aws_ami" "ubuntu_lts" {
   # aws ec2 describe-images --filters "Name=name,Values=ubuntu/images*ubuntu-focal-20.04-amd64-server-*"
   owners = ["099720109477"]
 }
+
+data "aws_ami" "hunter_labs_sandbox" {
+  # Identify the latest labs sandbox image
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["${var.org_name}-sandbox-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  # restrict search to ami's within our account
+  owners = [var.aws_account]
+}
