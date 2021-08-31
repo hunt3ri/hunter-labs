@@ -9,7 +9,7 @@ terraform {
     }
   }
   backend "s3" {
-    key     = "common/vpc/terraform.tfstate"
+    key     = "middleware/ec2/sandbox/terraform.tfstate"
   }
 }
 

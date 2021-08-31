@@ -19,11 +19,11 @@ module "sandbox_sg" {
   egress_rules         = ["all-all"]
 }
 
-resource "aws_instance" "ubuntu_cluster" {
-  # Create EC2 Sandbox Instance(s) using base ubuntu AMI
-  count                       = var.ubuntu_ami_instance
+resource "aws_instance" "ec2_cluster" {
+  # Create EC2 Sandbox Instance(s)
+  count                       = var.instance_count
 
-  ami                         = data.aws_ami.ubuntu_lts.id
+  ami                         = var.ami_id
   instance_type               = var.instance_type
 
   subnet_id                   = data.terraform_remote_state.vpc.outputs.public_subnet_ids[count.index]
@@ -34,25 +34,9 @@ resource "aws_instance" "ubuntu_cluster" {
 
   tags = {
     Name = "${var.instance_name}-${count.index + 1}"
-    Owner = var.org_name
-  }
-}
-
-resource "aws_instance" "sandbox_cluster" {
-  # Create EC2 Sandbox Instance(s) using custom Labs sandbox AMI
-  count                       = var.sandbox_ami_instance
-
-  ami                         = data.aws_ami.hunter_labs_sandbox.id
-  instance_type               = var.instance_type
-
-  subnet_id                   = data.terraform_remote_state.vpc.outputs.public_subnet_ids[count.index]
-  associate_public_ip_address = var.associate_public_ip_address
-  vpc_security_group_ids      = [module.sandbox_sg.this_security_group_id]
-
-  key_name                    = aws_key_pair.keypair.key_name
-
-  tags = {
-    Name = "${var.instance_name}-${count.index + 1}"
-    Owner = var.org_name
+    BusinessOwner = var.tag_business_owner
+    ServiceCategory = var.tag_business_service_category
+    DataClassification = var.tag_data_classification
+    Identifier = var.tag_identifier
   }
 }

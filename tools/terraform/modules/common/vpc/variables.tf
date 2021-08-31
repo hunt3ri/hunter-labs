@@ -14,6 +14,11 @@ variable "profile" {
   description = "AWS profile we're readings credentials from, read from TF_VAR_profile env var"
 }
 
+variable "backend_key" {
+  description = "Location of backend state file"
+  default = "common/vpc/terraform.tfstate"
+}
+
 ###########
 # VPC
 ###########

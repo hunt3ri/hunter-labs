@@ -30,20 +30,20 @@ data "aws_ami" "ubuntu_lts" {
   owners = ["099720109477"]
 }
 
-data "aws_ami" "hunter_labs_sandbox" {
-  # Identify the latest labs sandbox image
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["${var.org_name}-sandbox-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  # restrict search to ami's within our account
-  owners = [var.aws_account]
-}
+//data "aws_ami" "hunter_labs_sandbox" {
+//  # Identify the latest labs sandbox image
+//  most_recent = true
+//
+//  filter {
+//    name   = "name"
+//    values = ["${var.org_name}-sandbox-*"]
+//  }
+//
+//  filter {
+//    name   = "virtualization-type"
+//    values = ["hvm"]
+//  }
+//
+//  # restrict search to ami's within our account
+//  owners = [var.aws_account]
+//}

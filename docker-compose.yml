@@ -4,7 +4,7 @@ version: "3.9"
 services:
   aws-toolkit:
     image: hunteri/terraform-packer:latest
-    container_name: aws-toolkit
+    container_name: aws-toolkit-2
     tty: true
     stdin_open: true
     volumes:

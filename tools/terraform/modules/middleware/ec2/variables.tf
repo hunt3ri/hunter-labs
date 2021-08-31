@@ -10,18 +10,53 @@ variable "instance_type" {
   description = "The type of instance to start"
 }
 
+variable "instance_count" {
+  description = "The number of instances to create"
+}
+
+variable "ami_id" {
+  description = "The AMI to use"
+}
+
+//variable "subnet_id" {
+//  description = "ID of subnet to integrate with"
+//}
+
+variable "backend_key" {
+  description = "Place for backend"
+  default = "middleware/ec2/terraform.tfstate"
+}
+
+
+
 variable "associate_public_ip_address" {
   description = "If true, the EC2 instance will have associated public IP address"
 }
 
-variable "ubuntu_ami_instance" {
-  description = "Set to 1 to create a sandbox instance with vanilla Ubuntu LTS AKI"
+//variable "ubuntu_ami_instance" {
+//  description = "Set to 1 to create a sandbox instance with vanilla Ubuntu LTS AKI"
+//}
+//
+//variable "sandbox_ami_instance" {
+//  description = "Set to 1 to create instance with custom Labs sandbox AMI"
+//}
+
+# Tags
+variable "tag_business_owner" {
+  description = "Business Owner Tag"
 }
 
-variable "sandbox_ami_instance" {
-  description = "Set to 1 to create instance with custom Labs sandbox AMI"
+variable "tag_business_service_category" {
+  description = "Business Service Category"
 }
 
+variable "tag_data_classification" {
+  description = "Data Classification"
+}
+
+variable "tag_identifier" {
+  description = "Tag to uniquely identify a single server or cluster"
+}
 #################
 # Key Pair
 #################
