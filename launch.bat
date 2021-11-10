@@ -1,1 +1,1 @@
-docker-compose run aws-toolkit
+docker-compose run hunter-labs bash

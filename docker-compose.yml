@@ -2,9 +2,9 @@
 version: "3.9"
 
 services:
-  aws-toolkit:
-    image: hunteri/terraform-packer:latest
-    container_name: aws-toolkit
+  hunter-labs:
+    image: hunteri/py-ops:0.1
+    container_name: hunter-labs
     tty: true
     stdin_open: true
     volumes:
