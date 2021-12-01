@@ -4,4 +4,7 @@
 # Terraform
 .terraform/
 
+# Local utils
 terragen/
+terragen-example-configs/
+
