@@ -4,5 +4,7 @@
 # Terraform
 .terraform/
 
+# Local utils
 terragen/
-aws-labs/
+terragen-example-configs/
+
