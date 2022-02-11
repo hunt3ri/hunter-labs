@@ -3,10 +3,8 @@
     msg:
       - 'aws_environment: {{ aws_environment }}'
       - 'aws_profile: {{ aws_profile }}'
-      - 'aws_account: {{ aws_account }}'
       - 'aws_region: {{ aws_region }}'
       - 'org_name: {{ org_name }}'
-      - 'ssh_key: {{ ssh_key }}'
 
 - name: Remove any existing config files
   ansible.builtin.file:
