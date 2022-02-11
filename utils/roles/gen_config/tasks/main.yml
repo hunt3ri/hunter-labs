@@ -3,11 +3,8 @@
     msg:
       - 'aws_environment: {{ aws_environment }}'
       - 'aws_profile: {{ aws_profile }}'
-      - 'aws_account: {{ aws_account }}'
       - 'aws_region: {{ aws_region }}'
-      - 'terraform_bucket: {{ terraform_bucket }}'
       - 'org_name: {{ org_name }}'
-      - 'ssh_key: {{ ssh_key }}'
 
 - name: Remove any existing config files
   ansible.builtin.file:
@@ -16,10 +13,7 @@
   with_items:
     - /tools/ansible/config/init_ansible_{{ aws_environment }}.sh
     - /tools/packer/config/pkr_vars_{{ aws_environment }}.sh
-    - /tools/terraform/config/backend_{{ aws_environment }}.config
-    - /tools/terraform/config/tf_vars_{{ aws_environment }}.sh
-    - /tools/terraform/modules/middleware/sandbox/vars_sandbox.tfvars
-    - /tools/terraform/modules/middleware/sandbox/vars_sandbox_cluster.tfvars
+
 
 - name: Generating ansible config
   ansible.builtin.template:
@@ -38,34 +32,3 @@
     group: root
     mode: 0555
 
-- name: Generating terraform backend config
-  ansible.builtin.template:
-    src: backend_config.j2
-    dest: /tools/terraform/config/backend_{{ aws_environment }}.config
-    owner: root
-    group: root
-    mode: 0555
-
-- name: Generating tf_vars config
-  ansible.builtin.template:
-    src: tf_vars_config.j2
-    dest: /tools/terraform/config/tf_vars_{{ aws_environment }}.sh
-    owner: root
-    group: root
-    mode: 0555
-
-- name: Generating sansbox tfvars
-  ansible.builtin.template:
-    src: vars_sandbox_tfvars.j2
-    dest: /tools/terraform/modules/middleware/sandbox/vars_sandbox.tfvars
-    owner: root
-    group: root
-    mode: 0666
-
-- name: Generating sansbox cluster tfvars
-  ansible.builtin.template:
-    src: vars_sandbox_cluster_tfvars.j2
-    dest: /tools/terraform/modules/middleware/sandbox/vars_sandbox_cluster.tfvars
-    owner: root
-    group: root
-    mode: 0666
