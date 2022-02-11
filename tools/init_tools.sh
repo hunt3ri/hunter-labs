@@ -65,6 +65,10 @@ else
 fi
 printf "${green}\nGlobal Ansible Config OK\n\n" && sleep 1
 
+# Git config
+git config --global credential.helper store
+git config --global pull.rebase false
+
 printf "Hunter Labs Ops Toolkit intialise status = SUCCESS.  Enjoy hacking on AWS :)\n\n ${normal}"
 
 # push environment onto command line - so easy to see what we're using

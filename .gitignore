@@ -5,6 +5,6 @@
 .terraform/
 
 # Local utils
-terragen/
-terragen-example-configs/
+tools/terraform
+
 
