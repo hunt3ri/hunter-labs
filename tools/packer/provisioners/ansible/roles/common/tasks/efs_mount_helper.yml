@@ -12,6 +12,5 @@
     cmd: ./build-deb.sh
 
 - name: Install AWS EFS Mount Helper
-  ansible.builtin.shell:
-    chdir: /tmp/efs-utils
-    cmd: apt-get -y install ./build/amazon-efs-utils*deb
+  apt:
+    deb: /tmp/efs-utils/build/amazon-efs-utils*deb
