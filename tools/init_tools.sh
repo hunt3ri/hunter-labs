@@ -19,24 +19,6 @@ printf "\nPacker v`packer --version`\n\n" && sleep 1
 printf "`terraform --version`\n\n"
 printf "${green}Version Check OK\n\n" && sleep 1
 
-# Get rid of any windows weirdness
-#dos2unix /tools/terraform/config/*.*
-#dos2unix /tools/packer/config/*.*
-#dos2unit /tools/ansible/config/*.sh
-
-#printf "Set global TERRAFORM config\n\n ${blue}" && sleep 1
-#if [ $1 == "prod" ] ; then
-#    source /tools/terraform/config/tf_vars_prod.sh
-#elif [ $1 == "test" ] ; then
-#    source /tools/terraform/config/tf_vars_test.sh
-#elif [ $1 == "dev" ] ; then
-#    source /tools/terraform/config/tf_vars_dev.sh
-#else
-#    echo 'ERROR - Environment argument must be in range - dev|test|prod'
-#    return
-#fi
-#printf "${green}\nGlobal Terraform Config OK\n\n" && sleep 2
-
 printf "Set global Packer config\n\n ${blue}"  && sleep 1
 
 if [ $1 == "prod" ] ; then
