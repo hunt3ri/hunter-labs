@@ -1,0 +1,20 @@
+# AWS have an EFS mount helper package that simplifies process of mounting an EFS drive
+# The below tasks install the mount helper so that any EC2 instances can access it
+- name: Install binutils
+  apt:
+    name: binutils
+
+- name: Clone AWS EFS Mount Helper repo
+  ansible.builtin.git:
+    repo: 'https://github.com/aws/efs-utils'
+    dest: /tmp/efs-utils
+
+- name: Build AWS EFS Mount Helper
+  ansible.builtin.shell:
+    chdir: /tmp/efs-utils
+    cmd: ./build-deb.sh
+
+- name: Install AWS EFS Mount Helper
+  ansible.builtin.shell:
+    chdir: /tmp/efs-utils
+    cmd: apt-get -y install ./build/amazon-efs-utils*deb
