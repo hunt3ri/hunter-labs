@@ -1,0 +1,7 @@
+---
+# Playbook mounts an EFS drive
+- name: Create users
+  hosts: aws_ec2
+  become: yes
+  roles:
+    - mount_efs

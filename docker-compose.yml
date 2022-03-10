@@ -3,7 +3,7 @@ version: "3.9"
 
 services:
   hunter-labs:
-    image: hunteri/py-ops:0.1
+    image: hunteri/py-ops:0.2
     container_name: hunter-labs
     tty: true
     stdin_open: true

@@ -1,0 +1,54 @@
+# TODO pass ssm variable to ansible
+
+
+- name: Get EFS ID
+  set_fact:
+    efs_id: "{{ lookup('aws_ssm', '{{ ssm_efs_key }}') }}"
+
+- name: Get EFS Access Point ID
+  set_fact:
+    efs_ap_id: "{{ lookup('aws_ssm', '{{ ssm_efs_ap_key }}') }}"
+
+- name: Debug EFS ID
+  ansible.builtin.debug:
+    msg: "EFS ID is {{ efs_id }}"
+
+- name: Debug Access Point ID
+  ansible.builtin.debug:
+    msg: "EFS Access Point ID {{ efs_ap_id }}"
+
+- name: Create efs directory if it does not exist
+  ansible.builtin.file:
+    path: /efs
+    state: directory
+    mode: '0755'
+
+# See docs here for more info https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html#mounting-fs-mount-helper-ec2-linux
+- name: Mount the EFS drive
+  ansible.builtin.command: mount -t efs {{ efs_id }} /efs
+
+- name: Check EFS drive successfully mounted
+  ansible.builtin.command: df /efs
+  register: result
+
+- name: Debug efs df output
+  ansible.builtin.debug:
+    var: result
+
+  # IMPORTANT - This will only work if the appropriate IAM Role is attached to the EC2 instance
+  # for example AmazonSSMRoleForAutomationAssumeQuickSetup includes the correct permissions
+  # You can test using mount -fav, see below link for more
+  # https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html#mount-fs-auto-mount-onreboot
+- name: Add /etc/fstab entry to ensure EFS mounted after reboot
+  ansible.builtin.lineinfile:
+    insertafter: EOF
+    path: /etc/fstab
+    line: "{{ efs_id }}:/ /efs efs _netdev,noresvport,tls,accesspoint={{ efs_ap_id }} 0 0"
+
+- name: Get /etc/fstab contents
+  ansible.builtin.command: cat /etc/fstab
+  register: result
+
+- name: Debug /etc/fstab contents
+  ansible.builtin.debug:
+    var: result
