@@ -35,8 +35,6 @@
   ansible.builtin.debug:
     var: result
 
-  # IMPORTANT - This will only work if the appropriate IAM Role is attached to the EC2 instance
-  # for example AmazonSSMRoleForAutomationAssumeQuickSetup includes the correct permissions
   # You can test using mount -fav, see below link for more
   # https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html#mount-fs-auto-mount-onreboot
 - name: Add /etc/fstab entry to ensure EFS mounted after reboot
