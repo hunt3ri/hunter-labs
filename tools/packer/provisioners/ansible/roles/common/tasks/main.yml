@@ -9,5 +9,10 @@
     upgrade: yes
     update_cache: yes
 
+- name: Install useful packages
+  apt:
+    pkg:
+    - unzip
+
 - name: Install AWS EFS Mount helper
   include: "efs_mount_helper.yml"
